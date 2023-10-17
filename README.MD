@@ -5,7 +5,6 @@ Aplicação Python - Flask de API REST
 Dentro da pasta classes/db , temos o arquivo 'criarDB.py' que ira criar um banco de dados na pasta raiz dataBase, utilizando a biblioteca sqlite3.
 Este banco de dados conta com uma tabela usuarios, e um registro 'admin' com a senha criptografada.
 Esta pasta 'classes/db' também contem o arquivo conexao.py, utilizado para realizar qualquer conexão na base de dados.
-(contém também o código comentado para conectar com uma base de dados MySQL)
 
 O diretorio BluePrint, contém as rotas da aplicação, que neste caso são dois caminhos principais:
     Rotas de Autenticação.
