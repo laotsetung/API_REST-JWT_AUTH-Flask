@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from classes.jwtManager import decodeJWT
-from classes.configSC import configSC
+import os
+from dotenv import load_dotenv, dotenv_values
 
 home_routes = Blueprint('home_BluePrint', __name__, template_folder='templates')
 
@@ -15,7 +16,7 @@ def index():
         if retorno == None:
             return "Token Inválido ou Expirado, fazer login novamente!", 401
         else:
-            estudio = configSC().nomeEstudio
+            estudio = os.getenv("nomeApp")
             return f"Logado na API REST do app : {estudio} ; rota /index", 200
     else:
         return "Token não fornecido, requisição encerrada", 401

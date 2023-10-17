@@ -1,12 +1,11 @@
 #Este arquivo é responsavel por Encode, Decode e Return do Token JWT
 import time
 import jwt
+import os
+from dotenv import load_dotenv, dotenv_values
 
-#Coloquei informações do projeto neste arquivo configSC
-from classes.configSC import configSC
-
-JWT_SECRET = configSC.secret
-JWT_ALGORITHM = configSC.algorithm
+JWT_SECRET = os.getenv("CHAVE")
+JWT_ALGORITHM = os.getenv("ALGORITIMO")
 
 #Essa função retorna os Tokens gerados.
 def token_response(token: str):
@@ -26,8 +25,7 @@ def signJWT(userID : str):
 #Essa função decodifica o token (ou seja, valida o token recebido)
 def decodeJWT(token : str):
     try:
-        decode_token = jwt.decode(token, JWT_SECRET, algorithms='HS256')
-        print (decode_token)
+        decode_token = jwt.decode(token, JWT_SECRET, algorithms=JWT_ALGORITHM)
         return decode_token if decode_token['expiry'] >= time.time() else None
     except:
         return None

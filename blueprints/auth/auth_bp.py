@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from classes.jwtManager import signJWT, decodeJWT
-from classes.configSC import configSC
+import os
+from dotenv import load_dotenv, dotenv_values
 from classes.login import login
 
 #Cria a blueprint de autenticação
@@ -13,7 +14,6 @@ def auth_login():
     if request.method == 'POST':
         usuario = request.form['usuario']
         senha = request.form['senha']
-        print(f"debug: usuario:{usuario} / senha:{senha}")
 
         if login.verificaLogin(usuario,senha):
             return signJWT(usuario), 200
@@ -34,7 +34,7 @@ def home():
         if retorno == None:
             return "Token Inválido ou Expirado, fazer login novamente!", 401
         else:
-            estudio = configSC().nomeEstudio
+            estudio = os.getenv("nomeApp")
             return f"Logado na API REST do app : {estudio} ;  rota: /home", 200
     else:
         return "Token não fornecido, terminando!", 401

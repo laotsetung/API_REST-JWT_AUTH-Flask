@@ -3,10 +3,12 @@ import sys
 from conexao import conexao
 import hashlib
 
-
-#mudar o path para poder importar Criptografar
-sys.path.append('..')
-from Criptografar import Criptografar
+#Criptografar a senha
+hash_object = hashlib.sha256()
+#Converte o password para Byte e encoda
+hash_object.update('admin'.encode())
+#Pega o valor hex do metodo hash
+senha = hash_object.hexdigest()
 
 c = conexao()
 con = c.con
@@ -23,7 +25,7 @@ cur.execute(tabela_usuarios)
 con.commit()
 
 #Cryptografar a senha e inserir usuario admin no banco
-senha = Criptografar().encriptar('admin')
+#senha = Criptografar().encriptar('admin')
 
 add_user = f"INSERT INTO usuarios (usuario, senha, flag) VALUES('admin','{senha}','ATIVO')"
 
