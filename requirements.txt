@@ -1,0 +1,5 @@
+flask
+dotenv
+sqlite3
+hashlib
+jwt
