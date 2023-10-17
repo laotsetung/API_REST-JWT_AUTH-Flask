@@ -1,11 +1,11 @@
 from flask import Flask
 from blueprints.auth.auth_bp import auth_routes
 from blueprints.home.home_bp import home_routes
-#Classe com configurações do projeto
-from classes.configSC import configSC
+import os
+from dotenv import load_dotenv, dotenv_values
 
 app = Flask(__name__)
-app.config['SECRECT_KEY'] = configSC.secret
+app.config['SECRECT_KEY'] = os.getenv("CHAVE")
 
 #BluePrints do projeto
 app.register_blueprint(auth_routes)
